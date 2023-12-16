@@ -1,0 +1,137 @@
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyIsInR5cGUiOiJhY2Nlc3MifQ.eyJ1c2VyIjp7ImlkIjoiVXNlcjpKUnM1T3dveVIiLCJjaWQiOiJDb21wYW55OlJVN09vWFJrVzQiLCJhIjp0cnVlLCJwIjpbIk1MREQiLCJNQyIsIk1VIiwiTUQiLCJNRyIsIk1WIiwiVkFERCIsIlZDIiwiVkQiLCJWVSIsIlZWIiwiU0MiLCJBUCIsIk1NUiIsIk1PTyIsIk1IRSJdLCJyIjoiV0xNIiwicHIiOiJSOjhIZ3lJQXgwIn0sImlhdCI6MTY2ODUxNTM2MSwiZXhwIjoxNjY4NjAxNzYxLCJhdWQiOiIiLCJpc3MiOiIiLCJzdWIiOiIiLCJqdGkiOiIzMzY1YzdhNi1mMTM3LTQ0MGYtYTcyZi1mZGUxZjljNmNlMmMifQ.GQ_Yddw22bearbtk7AChh9wpOxt0sjm81X1tSrIDeG0';
+const user  = 'b2XIEXiz1';
+let getRequestOptions = {
+    method : 'GET',
+    headers: {'Authorization': 'Bearer '+  token},
+    muteHttpExceptions: true
+  }; 
+
+
+
+
+
+let eventsAfterDate = "&eventTime.logDate.date%5B%24gte%5D=2022%2F11%2F03";
+let eventsBeforeDate = "&eventTime.logDate.date%5B%24lte%5D=2022%2F11%2F04";
+
+let fetchUrl = "https://backend.apexhos.com/hos_events?userId=%21%2A~User%3A"+user+eventsAfterDate+eventsBeforeDate;
+
+
+
+
+
+let jsonData = await fetch(fetchUrl,getRequestOptions).then((response) => {
+	
+	if(response.status==200){
+		return response.json();
+	}
+	return Promise.reject(new Error('Token Expired'));
+}); // parse to JSON 
+
+let dataArray = jsonData.data;
+
+dataArray.sort(compare); // sort by time in ascending order 
+
+for(let counter = 0 ; counter < dataArray.length ; counter ++){
+
+	console.log(parseInt(dataArray[counter].seqId,16),dataArray[counter]);
+
+}
+////////////////////////////////////////////////////////////////////////////// continue till now
+
+/*
+for(let counter = 0 ; counter < dataArray.length; counter++){
+
+let eventId = parseInt(dataArray[counter].seqId,16);
+
+
+	if(eventId == 761){
+
+		let raw = dataArray[counter];
+
+		
+		let eventName = dataArray[counter].eventCode.id;
+
+
+
+
+		const date = new Date(raw.eventTime.timestamp);
+
+
+
+		const year = date.getFullYear();
+
+		const month = padTo2Digits(date.getMonth() + 1);
+		const day = padTo2Digits(date.getDate());
+
+		const dateWithSlashes = [year, month, day].join('/');
+
+		dataArray[counter].eventTime.logDate.date='2022/11/01';
+
+		
+
+		
+
+
+
+		let url = "https://backend.apexhos.com/hos_events/";
+
+		url+=raw._id+"?%24client%5BignoreRev%5D=true&%24client%5BcreateIfNotExist%5D=true&%24client%5BuseServerAuditTime%5D=true";
+
+		 raw =JSON.stringify(raw);
+
+		let putRequestOptions = {
+		  method: 'PUT',
+		  headers: {
+			  "Authorization": "Bearer "+token ,
+			  "Content-Type": "application/json"
+		  },
+		  body: raw,
+		  redirect: 'follow'
+		};
+
+
+		fetch(url, putRequestOptions)
+		  .then(response => response.text())
+		  .then(result => console.log(result))
+		  .catch(error => console.log('error', error));
+
+		  url="";  
+
+
+	}
+}
+
+*/
+
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+
+
+function compare(firstObj,secondObj){
+
+	let firstObjectTimeStamp = firstObj.eventTime.timestamp;
+	let secondObjectTimeStamp = secondObj.eventTime.timestamp;
+	if(firstObjectTimeStamp>secondObjectTimeStamp){
+		return 1;
+	}	
+	else if(firstObjectTimeStamp<secondObjectTimeStamp){
+		return -1;
+	}
+	return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

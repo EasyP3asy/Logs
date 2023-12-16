@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>   
+<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="LogsDesign.css" type="text/css">
+		<link href="LogTableDesign.css" type="text/css" rel="stylesheet" id="afterStyles">
+		<link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+	
+		
+
+</head>
+<body>
+
+
+
+<div class="container fade-in-container">
+	<div class="brand-logo"></div>
+	<div class="brand-title">
+		<div>AJ</div> 
+		<div>Transportation</div>
+	</div>
+	<div id="mainCard" class="inputs">
+	
+			<div class="login">
+				<label for="login" class="loginLabel">Login</label>
+				<span></span>
+				<input type="email" name="login" id="companyLogin" class="authentication" placeholder="Email"></input>
+			</div>
+			<div class="password">				
+				<label for="password" class="passwordLabel" onclick="showPassword()">Password</label>
+				<span></span>				
+				<input type="password" name="password"  id="companyPassword" class="authentication" placeholder="Password" ></input>
+				
+			</div>	
+			
+			<div class="dropdown company">			
+					<label for="companyName">Companies</label><span class="warningSign"></span>
+					<input type ="text" name="companyName" class="textBox" placeholder="Select Company"  readonly></input>	
+					<span></span>
+					<div class="option">
+					<div class="companyNameContainer dropdown-item"><ion-icon name="business-outline"></ion-icon><span>AJ TRANSPORTATION INC</span></div>
+					<div class="companyNameContainer dropdown-item"><ion-icon name="business-outline"></ion-icon><span>METRS TRUCKING LLC</span></div>
+					<div class="companyNameContainer dropdown-item"><ion-icon name="business-outline"></ion-icon><span>KELSEY EXPRESS</span></div>
+					<div class="companyNameContainer dropdown-item"><ion-icon name="business-outline"></ion-icon><span>VITAEX INC</span></div>
+					</div>					
+			
+			</div>	
+			
+			<div class="userName">
+				<label for="userName">User</label><span class="warningSign"></span>				
+				<input type ="text" name="userName" class="textBox" placeholder="Apex"  value="Apex" readonly></input>
+			</div>	
+			<div class="buttonContainer">
+				<button class="submitButton" onclick="main()">Submit</button>
+			</div>
+			 <div class="error-notice">
+				<div class="oaerror danger">
+					<strong>Error</strong>- Wrong username/password. Please try again.
+				</div>	
+			</div>
+	</div>
+</div>
+
+
+<div class="top-Header">
+	<div id="topCard" class="inputs">	
+		<div class="dropdown drivers">			
+			<label for="driverName">Drivers</label><span class="warningSign"></span>
+			<input type ="text" name="driverName" class="textBox" placeholder="Select Driver" autocomplete="off"></input>
+			
+			<div class="option">
+			</div>
+		</div>		
+		<div class="inputDate date-inputs">
+			<label for="date" class="dateLabel">Start Date </label>
+			<input type="date" name="date" id="startDate" class="date" ></input>
+		</div>
+		<div class="inputDate2 date-inputs">				
+			<label for="date" class="dateLabel">End Date </label>
+			<input type="date" name="date"  id="endDate" class="date"></input>
+		</div>	
+		<div class="top_header loading button"><span>Load</span></div>
+		
+		<div class="last_sync">
+			<label for="last_sync_label" class="syncLabel">Last Update At :</label>
+			<input type="text" class="last_sync_value" readonly></input>
+		</div>
+		
+	</div>	
+</div>
+
+<div class="sidebar">
+	<div class="portal_name"><span>Apex </span><img src="icons/crown3.png"></div>
+	<div class="notifications">
+		<div class="failedEvents"><label for="failedEvents" class="failedEvents_label"><img src="icons/error.png">Failed Events :</label><div class="numberOfFailedEvents"></div></div>
+		<div class="warnings"><label for="warnings" class="warnings_label"><img src="icons/warning.png">Warning</label></div>
+		<div class="errors"><label for="errors" class="errors_label"><img src="icons/attention.png">Errors</label></div>
+	
+	</div>
+</div>
+
+<div class="main-content">
+	<div class="header">
+		 <div class="connection-indicator"></div>
+		 <div class="driverName"><span></span></div> 
+		 <div class="period"><span class="startDate"></span><span class="endDate"></span></div>
+		 <nav class="navbar-main">
+			<div class="showEvents switch"><div class="switchLabel">Show Events </div><input type="checkbox" class="toggle">
+				<div class="dropdown_showEvents option">
+					<ul>
+						<li><label class="showEvents_label">Login</label><input type="checkbox" class="login_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Logout</label><input type="checkbox" class="logout_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Certification</label><input type="checkbox" class="certification_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Engine Shut-down</label><input type="checkbox" class="engineOff_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Engine Power-up</label><input type="checkbox" class="engineOn_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Power data diagnostic</label><input type="checkbox" class="powerData_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Power data diagnostic (cleared)</label><input type="checkbox" class="powerDataCleared_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Engine sync data diagnostic</label><input type="checkbox" class="engineSync_checkbox toggle" checked></li>
+						<li><label class="showEvents_label">Engine sync data diagnostic (cleared)</label><input type="checkbox" class="engineSyncCleared_checkbox toggle" checked></li>
+					</ul>
+				</div>
+			</div>
+			<div class="colorizer switch"><div class="switchLabel">Colorize</div><input type="checkbox" class="toggle"></div>
+			<div class="table-navigator switch"><div class="switchLabel">Table Navigator</div><input type="checkbox" class="table-nav toggle"></div>
+			<div class="graph-navigator switch"><div class="switchLabel">Graph Navigator</div><input type="checkbox" class="graph-nav toggle"></div>		
+			<div class="normalizer switch"><div class="switchLabel">Normalizer</div><input type="checkbox" class="normalizer toggle"></div>	
+			<div class="refreshContainer"><div class="refreshWrapper"><img src="icons/loading.png"></div></div>
+		</nav>
+	</div>
+
+	<nav class="log_forms">
+		<div class="electronic_logs logs_version focused">Electronic Version</div>
+		<div class="paper_logs logs_version">Paper Version</div>
+	</nav>
+	<div id="infoCard" class="infoField">	
+		<div id="editForm" class="edit_form_container">
+			<div class="edit_form_wrapper">
+				<div class="edit_form_titleBar">Edit Events (Super User)</div>
+				<div class="event_content">
+				
+					<div class="id_content">
+						<div class="id_title">ID</div>
+						<div class="id_value"><input type="number" class="event_edit_field"></div>						
+					</div>
+					
+					<div class="time_content">
+						<div class="time_title">Time</div>
+						<div class="time_value"><input type="time" class="event_edit_field"></div>
+					</div>
+					
+					<div class="code_content">
+						<div class="code_title">Code</div>
+						<div class="code_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="code_options_container">
+							<div class="code_options_wrapper">
+								<ul class="code_content_list options_list">
+									<li class="code_content_item options_list_items">Off Duty</li>
+									<li class="code_content_item options_list_items">Off Duty (Waiting Time)</li>
+									<li class="code_content_item options_list_items">Sleeper</li>
+									<li class="code_content_item options_list_items">Driving</li>
+									<li class="code_content_item options_list_items">On Duty</li>
+									<li class="code_content_item options_list_items">Intermediate w/ CLP</li>
+									<li class="code_content_item options_list_items">Intermediate w/ RLP</li>
+									<li class="code_content_item options_list_items">Personal Use</li>
+									<li class="code_content_item options_list_items">Yard Moves</li>
+									<li class="code_content_item options_list_items">Certification (1)</li>
+									<li class="code_content_item options_list_items">Certification (2)</li>
+									<li class="code_content_item options_list_items">Certification (3)</li>
+									<li class="code_content_item options_list_items">Certification (4)</li>
+									<li class="code_content_item options_list_items">Certification (5)</li>
+									<li class="code_content_item options_list_items">Certification (6)</li>
+									<li class="code_content_item options_list_items">Certification (7)</li>
+									<li class="code_content_item options_list_items">Certification (8)</li>
+									<li class="code_content_item options_list_items">Certification (>=9)</li>
+									<li class="code_content_item options_list_items">Login</li>
+									<li class="code_content_item options_list_items">Logout</li>
+									<li class="code_content_item options_list_items">Engine Power-up w/ CLP</li>
+									<li class="code_content_item options_list_items">Engine Power-up w/ RLP</li>
+									<li class="code_content_item options_list_items">Engine Shut-down w/ CLP</li>
+									<li class="code_content_item options_list_items">Engine Shut-down w/ RLP</li>
+								</ul>								
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="origin_content">
+						<div class="origin_title">Origin</div>
+						<div class="origin_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="origin_options_container">
+							<div class="origin_options_wrapper">
+								<ul class="origin_content_list options_list">
+									<li class="origin_content_item options_list_items">Auto</li>
+									<li class="origin_content_item options_list_items">Driver</li>
+									<li class="origin_content_item options_list_items">Other User</li>
+									<li class="origin_content_item options_list_items">Unidentified Driver</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="status_content">
+						<div class="status_title">Status</div>
+						<div class="status_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="status_options_container">
+							<div class="status_options_wrapper">
+								<ul class="status_content_list options_list">
+									<li class="status_content_item options_list_items">None</li>
+									<li class="status_content_item options_list_items">Active</li>
+									<li class="status_content_item options_list_items">Inactive - Changed</li>
+									<li class="status_content_item options_list_items">Inactive - Change Requested</li>
+									<li class="status_content_item options_list_items">Inactive - Change Rejected</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="vehicle_content">
+						<div class="vehicle_title">Vehicle</div>
+						<div class="vehicle_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="vehicle_options_container">
+							<div class="vehicle_options_wrapper">
+								<ul class="vehicle_content_list options_list">
+									<li class="vehicle_content_item options_list_items">No Vehicle</li>									
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="odometer_content">
+						<div class="odometer_title">Odomter</div>
+						<div class="odometer_value"><input type="number" class="event_edit_field"></div>					
+					</div>
+					
+					<div class="engine_hours_content">
+						<div class="engine_hours_title">Engine Hours</div>
+						<div class="engine_hours_value"><input type="number" class="event_edit_field"></div>					
+					</div>
+					
+					<div class="eld_content">
+						<div class="eld_title">ELD</div>
+						<div class="eld_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="eld_options_container">
+							<div class="eld_options_wrapper">
+								<ul class="eld_content_list options_list">
+									<li class="eld_content_item options_list_items">No ELD</li>									
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="location_source_content">
+						<div class="location_source_title">Location Source</div>
+						<div class="location_source_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="location_source_options_container">
+							<div class="location_source_wrapper">
+								<ul class="location_source_list options_list">
+									<li class="location_source_item options_list_items">Not Selected</li>	
+									<li class="location_source_item options_list_items">Location generated when connected to ECM</li>
+									<li class="location_source_item options_list_items">Location when not connected to ECM</li>									
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="positioning_content">
+						<div class="positioning_source_title">Positioning</div>
+						<div class="positioning_source_value"><span></span><div class="dropdown_icon"><img src="icons/caret.png"></div></div>
+						<div class="positioning_source_options_container">
+							<div class="positioning_source_wrapper">
+								<ul class="positioning_source_list options_list">
+									<li class="positioning_source_item options_list_items">Not Selected</li>	
+									<li class="positioning_source_item options_list_items">Manual</li>
+									<li class="positioning_source_item options_list_items">Automatic</li>									
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="location_note_content">
+						<div class="location_note_title">Location Note</div>
+						<div class="location_note_value"><input type="text" class="event_edit_field"></div>					
+					</div>					
+					
+					<div class="location_lat_content">
+						<div class="location_lat_title">Latitude</div>
+						<div class="location_lat_value"><input type="number" class="event_edit_field"></div>					
+					</div>
+					
+					<div class="location_long_content">
+						<div class="location_long_title">Longitude</div>
+						<div class="location_long_value"><input type="number" class="event_edit_field"></div>					
+					</div>
+
+					<div class="calculated_location_content">
+						<div class="calculated_location_title">Calc. Location</div>
+						<div class="calculated_location_value"><input type="text" class="event_edit_field" readonly></div>					
+					</div>
+					
+					<div class="notes_content">
+						<div class="notes_title">Notes</div>
+						<div class="notes_value"><input type="text" class="event_edit_field"></div>					
+					</div>
+					
+					<div class="updatedBy_content">
+						<div class="updatedBy_title">Updated By</div>
+						<div class="updatedBy_value"><input type="text" class="event_edit_field" readonly></div>					
+					</div>
+					
+					<div class="updatedAt_content">
+						<div class="updatedAt_title">Updated at</div>
+						<div class="updatedAt_value"><input type="text" class="event_edit_field" readonly></div>					
+					</div>
+				</div>		
+			</div>		
+		</div>		
+	</div>	
+	
+	<div class="paperlog_version hidden">
+		<div class="allPaperlog_container">
+		
+		</div>
+	</div>
+	
+	
+	<div class="footer">
+
+
+			<div class="loading filler-container">
+				<div class="filler">
+					<div class="progress_bar"></div>
+				</div>
+				<div class="progress_info_card">
+					<div class="progress_container">
+							<div class="progress_timer"><div class="minute_timer"></div><div class="timer_colon">:</div><div class="second_timer"></div></div>
+							<div class="total_selected_events progress_text">Selected Events</div>
+							<div class="number_selected_events progress_value"></div>
+							<div class="total_downloaded_events progress_text">Downloaded Events</div>
+							<div class="number_downloaded_events progress_value"></div>
+							<div class="updated_events progress_text">Updated Events</div>
+							<div class="number_updated_events progress_value"></div>
+							<div class="failed_events progress_text">Failed Events</div>
+							<div class="number_failed_events progress_value"></div>					
+							<hr>
+							<div class="processing_text_container progress_text">Processing</div>
+							<div class="progress_indicator progress_value"></div>
+					</div>
+				</div>
+			</div>
+			<nav class="navbar-footer">
+				<div class="rollback button"><div class="rollback_text">Rollback</div><div class="vertical_line"></div><img src="icons/rollback.png"></div>
+				<div class="timerInput shiftMoveTimer">				
+					<div  class="hourInput timers">
+						  <input type="text" class="inp" placeholder="&nbsp;">
+						  <span class="label">Hour</span>
+						  <span class="focus-bg"></span>
+					</div>
+					<span class="colon">:</span>
+					<div  class="minuteInput timers">
+						  <input type="text" class="inp" placeholder="&nbsp;">
+						  <span class="label">Minute</span>
+						  <span class="focus-bg"></span>
+					</div>
+				</div>
+				<div class="firstId shiftingIds "><input type="text" placeholder=" "><span class="label">First ID</span></div>
+				<div class="direction button forward"><span class="button"></span></div>
+				<div class="lastId shiftingIds "><input type="text" placeholder=" "><span class="label">Last ID</span></div>
+				<div class="loading button"><span>Start</span></div>
+				<div class="dropdown_events">
+					<label for="eventName">Events</label>
+					<input type="text" name="eventName" class="eventName_input" placeholder="Select Event" autocomplete="off" value="Standard" readonly>
+					<div class="clonnedEvents_List">
+						<div class="clon_options">
+							<div class="clon_events_name default">Standard</div>
+							<div class="clon_events_name">Login</div>
+							<div class="clon_events_name">Logout</div>
+							<div class="clon_events_name">Off Duty</div>
+							<div class="clon_events_name">Sleeper</div>
+							<div class="clon_events_name">Driving</div>
+							<div class="clon_events_name">On Duty</div>
+							<div class="clon_events_name">Intermediate w/ CLP</div>
+							<div class="clon_events_name">Engine Power-up w/ CLP</div>
+							<div class="clon_events_name">Engine Shut-down w/ CLP</div>
+							<div class="clon_events_name">Certification (1)</div>
+							
+						</div>
+					</div>
+				</div>					
+
+
+
+
+				<div class="clonizer button"><span>Clonizer</span></div>
+			</nav>
+
+
+
+
+	</div>	
+</div>
+
+
+
+
+<div class="error-notice authentication-error">
+	<div class="oaerror danger">
+		<strong>Error</strong>- Authentication Error. Please restart page.
+	</div>	
+</div>
+
+
+
+
+									<!-- spinner -->
+<div class="spinner">
+  <div class="inner one"></div>
+  <div class="inner two"></div>
+  <div class="inner three"></div>
+</div>
+<div class="author">Made By Oscar</div> 	
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="functions.js"  type="text/javascript"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyB1GzufG6ki8JKxmkBg-XYuySPSQsyd2WE&callback=apiConnected"></script>
+
+
+
+
+
+<!-- <script async defer src="https://apis.google.com/js/api.js"
+onload="this.onload=function(){};handleClientLoad()"
+onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+-->
+
+
+
+
+
+</body>
+</html>
+
+
+
